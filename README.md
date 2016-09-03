@@ -1,3 +1,3 @@
 # RDPManager
 
-![Beta GUI](RDPv1.1.png)
+![Beta GUI](RDP_Version1.1.png)
