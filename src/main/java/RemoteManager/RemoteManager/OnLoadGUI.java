@@ -132,6 +132,7 @@ public class OnLoadGUI {
 		final JFrame addUI = AddServerUI.buildAddEditUI(ConnectionsTable,Populate);
 		addUI.setVisible(false);
 		
+		JButton abc = new JButton();
 		JButton AddButton = new JButton("Add");
 		AddButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
