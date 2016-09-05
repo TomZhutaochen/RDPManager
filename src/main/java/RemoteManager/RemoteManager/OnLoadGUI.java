@@ -40,6 +40,11 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JPasswordField;
+import javax.swing.JCheckBoxMenuItem;
+import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.JSeparator;
+import javax.swing.DropMode;
 
 
 public class OnLoadGUI {
@@ -80,7 +85,6 @@ public class OnLoadGUI {
 		springLayout.putConstraint(SpringLayout.WEST, panel, 10, SpringLayout.WEST, mainFrame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, panel, 460, SpringLayout.WEST, mainFrame.getContentPane());
 		mainFrame.getContentPane().add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
 		
 		
 		final JTable ConnectionsTable = new JTable();	
@@ -108,8 +112,10 @@ public class OnLoadGUI {
 		} else {
 			HidePW.setSelected(false);
 		}
+		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane(ConnectionsTable);
+		scrollPane.setBounds(1, 1, 448, 75);
 		panel.add(scrollPane);
 		ConnectionsTable.setBackground(Color.WHITE);
 		ConnectionsTable.setFont(new Font("SansSerif", Font.PLAIN, 11));
@@ -170,7 +176,7 @@ public class OnLoadGUI {
 		ConnectButtonRDP.setBounds(101, 31, 105, 34);
 		contentPanel.add(ConnectButtonRDP);
 		
-		JButton checkVPNConnection = new JButton("CheckVPN");
+		JButton checkVPNConnection = new JButton("Query Site");
 		checkVPNConnection.setIcon(new ImageIcon("resources/VPN.png"));
 		
 		checkVPNConnection.addActionListener(new ActionListener() {
@@ -281,10 +287,16 @@ public class OnLoadGUI {
 		mntmAdd.setFont(new Font("SansSerif", Font.BOLD, 12));
 		FileMenu.add(mntmAdd);
 		
+		JSeparator separator = new JSeparator();
+		FileMenu.add(separator);
+		
 		JMenuItem mntmEdit = new JMenuItem("Edit Servers");
 		mntmEdit.setIcon(new ImageIcon("resources/Edit.png"));
 		mntmEdit.setFont(new Font("SansSerif", Font.BOLD, 12));
 		FileMenu.add(mntmEdit);
+		
+		JSeparator separator_1 = new JSeparator();
+		FileMenu.add(separator_1);
 		
 		JMenuItem mntmDelete = new JMenuItem("Delete Server");
 		mntmDelete.setIcon(new ImageIcon("resources/Delete.png"));
@@ -315,6 +327,9 @@ public class OnLoadGUI {
 				}}
 		}
     	});
+		
+		JSeparator separator_2 = new JSeparator();
+		FileMenu.add(separator_2);
 		
 		
 		JMenuItem mntmExit = new JMenuItem("Exit System");
@@ -392,6 +407,21 @@ public class OnLoadGUI {
 		OptionsMenu.add(HidePW);
 		HidePW.setSize(100,200);
 		
+		Component glue_1 = Box.createGlue();
+		OptionsMenu.add(glue_1);
+		
+			
+			JMenu mnNewMenu = new JMenu("Attributions");
+			mnNewMenu.setIcon(new ImageIcon("resources/Attribution.png"));
+			mnNewMenu.setFont(new Font("SansSerif", Font.BOLD, 12));
+			menuBar.add(mnNewMenu);
+			
+			JLabel lblNewLabel = new JLabel("   All Icons provided by https://icons8.com    ");
+			mnNewMenu.add(lblNewLabel);
+		
+		Component glue = Box.createGlue();
+		menuBar.add(glue);
+		
 		JMenu mnAbout = new JMenu("About  ");
 		mnAbout.setIcon(new ImageIcon("resources/About.png"));
 		mnAbout.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -399,15 +429,6 @@ public class OnLoadGUI {
 		
 		JLabel lblAbout = new JLabel("   Windows RDP Manager - https://github.com/symonk/     ");
 		mnAbout.add(lblAbout);
-	
-		
-		JMenu mnNewMenu = new JMenu("Attributions");
-		mnNewMenu.setIcon(new ImageIcon("resources/Attribution.png"));
-		mnNewMenu.setFont(new Font("SansSerif", Font.BOLD, 12));
-		menuBar.add(mnNewMenu);
-		
-		JLabel lblNewLabel = new JLabel("   All Icons provided by https://icons8.com    ");
-		mnNewMenu.add(lblNewLabel);
 		mainFrame.setVisible(true);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setSize(478,262);
