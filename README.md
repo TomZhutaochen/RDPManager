@@ -1,5 +1,7 @@
 # RDPManager
 
+STILL UNDER HEAVY DEVELOPMENT
+
 Recently did a complete rewrite of the tool, currently in version 1.1 </br>
 
 ![Beta GUI](RDP_Version1.1.png)
