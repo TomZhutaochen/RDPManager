@@ -371,11 +371,18 @@ public class OnLoadGUI {
 		JButton DeleteButton = new JButton("Delete");
 		DeleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+					
+					
+								
 				if (ConnectionsTable.getSelectedRow() == -1) {
 					JOptionPane.showMessageDialog(null, "You have not selected a database record");
-				} else {
+					return;
+				} 
+				
+				int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this record?");
+				if (answer == JOptionPane.YES_OPTION) {
+				
+				
 					DeletionHandler DHandle = new DeletionHandler();
 					int selectedRow = ConnectionsTable.getSelectedRow();
 					String value = ConnectionsTable.getValueAt(selectedRow, 1).toString();
@@ -394,8 +401,15 @@ public class OnLoadGUI {
 						ConnectionCombo.addItem(dbData.get(i).getIP());
 					}
 				}
-			}
+			
+				
+				 else {
+					JOptionPane.getRootFrame().dispose();
+					
+				}
+				}
 		});
+		
 		DeleteButton.setIcon(new ImageIcon("resources/Delete.png"));
 		DeleteButton.setFont(new Font("SansSerif", Font.BOLD, 11));
 		DeleteButton.setBorder(null);
@@ -433,5 +447,6 @@ public class OnLoadGUI {
 		mainFrame.setVisible(true);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setSize(478,262);
-	}
+	
+}
 }
