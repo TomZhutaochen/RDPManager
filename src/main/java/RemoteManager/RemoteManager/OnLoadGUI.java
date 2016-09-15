@@ -59,7 +59,7 @@ public class OnLoadGUI {
 		final DatabaseHelper DH = new DatabaseHelper();
 		final PasswordToggler togglePW = new PasswordToggler();
 		boolean pwSetting = DH.getPasswordSetting();
-		final JComboBox<String> PingCombo = new JComboBox<String>();
+		final JComboBox<String> PingDropDown = new JComboBox<String>();
 
 		
 		mainFrame.setBackground(new Color(30, 144, 255));
@@ -106,17 +106,17 @@ public class OnLoadGUI {
             ConnectionsTable.getColumnModel().getColumn(3).setCellRenderer(togglePW);
 		}
 		
-		final JRadioButton HidePW = new JRadioButton("Show Passwords    ");
+		final JRadioButton OptionsMenuHideShowPasswordRadioButton = new JRadioButton("Show Passwords    ");
 		if (pwSetting) {
-			HidePW.setSelected(true);
+			OptionsMenuHideShowPasswordRadioButton.setSelected(true);
 		} else {
-			HidePW.setSelected(false);
+			OptionsMenuHideShowPasswordRadioButton.setSelected(false);
 		}
 		panel.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane(ConnectionsTable);
-		scrollPane.setBounds(1, 1, 448, 75);
-		panel.add(scrollPane);
+		JScrollPane DatabaseScrollPane = new JScrollPane(ConnectionsTable);
+		DatabaseScrollPane.setBounds(1, 1, 448, 75);
+		panel.add(DatabaseScrollPane);
 		ConnectionsTable.setBackground(Color.WHITE);
 		ConnectionsTable.setFont(new Font("SansSerif", Font.PLAIN, 11));
 		
@@ -169,59 +169,59 @@ public class OnLoadGUI {
 		mainFrame.getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
 		
-		JButton ConnectButtonRDP = new JButton("Connect RDP ");
-		ConnectButtonRDP.setIcon(new ImageIcon("resources/Connect.png"));
-		ConnectButtonRDP.setFont(new Font("SansSerif", Font.BOLD, 11));
-		ConnectButtonRDP.setBorder(null);
-		ConnectButtonRDP.setBackground(Color.LIGHT_GRAY);
-		ConnectButtonRDP.setBounds(101, 31, 105, 34);
-		contentPanel.add(ConnectButtonRDP);
+		JButton ConnectButton = new JButton("Connect RDP ");
+		ConnectButton.setIcon(new ImageIcon("resources/Connect.png"));
+		ConnectButton.setFont(new Font("SansSerif", Font.BOLD, 11));
+		ConnectButton.setBorder(null);
+		ConnectButton.setBackground(Color.LIGHT_GRAY);
+		ConnectButton.setBounds(101, 31, 105, 34);
+		contentPanel.add(ConnectButton);
 		
-		JButton checkVPNConnection = new JButton("Query Site");
-		checkVPNConnection.setIcon(new ImageIcon("resources/VPN.png"));
+		JButton QueryButton = new JButton("Query Site");
+		QueryButton.setIcon(new ImageIcon("resources/VPN.png"));
 		
-		checkVPNConnection.addActionListener(new ActionListener() {
+		QueryButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		checkVPNConnection.setFont(new Font("SansSerif", Font.BOLD, 11));
-		checkVPNConnection.setBorder(null);
-		checkVPNConnection.setBackground(Color.LIGHT_GRAY);
-		checkVPNConnection.setBounds(0, 31, 98, 34);
-		contentPanel.add(checkVPNConnection);
+		QueryButton.setFont(new Font("SansSerif", Font.BOLD, 11));
+		QueryButton.setBorder(null);
+		QueryButton.setBackground(Color.LIGHT_GRAY);
+		QueryButton.setBounds(0, 31, 98, 34);
+		contentPanel.add(QueryButton);
 		
 		
 		DefaultListCellRenderer myRender = new DefaultListCellRenderer();
 		myRender.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
 		myRender.setVerticalAlignment(DefaultListCellRenderer.CENTER);
 		
-		PingCombo.setRenderer(myRender);
-		PingCombo.setFont(new Font("SansSerif", Font.BOLD, 16));
-		PingCombo.setBounds(246, 0, 206, 30);
-		contentPanel.add(PingCombo);
+		PingDropDown.setRenderer(myRender);
+		PingDropDown.setFont(new Font("SansSerif", Font.BOLD, 16));
+		PingDropDown.setBounds(246, 0, 206, 30);
+		contentPanel.add(PingDropDown);
 
 		ArrayList<RemoteConnection> dbData = DH.pullData();
 		for (int i = 0; i < dbData.size(); i++) {
-			PingCombo.addItem(dbData.get(i).getIP());
+			PingDropDown.addItem(dbData.get(i).getIP());
 		}
 		
-		PingCombo.addActionListener(new ActionListener() {
+		PingDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent a) {
 				
 			
 			}
 	    	});
 	
-		JButton PingServer = new JButton("Ping");
-		PingServer.setIcon(new ImageIcon("resources/Ping.png"));
+		JButton PingButton = new JButton("Ping");
+		PingButton.setIcon(new ImageIcon("resources/Ping.png"));
 		final NetworkHelper myNH = new NetworkHelper();
-		PingServer.addActionListener(new ActionListener() {
+		PingButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if (PingCombo.getSelectedIndex() == -1) {
+				if (PingDropDown.getSelectedIndex() == -1) {
 					JOptionPane.showMessageDialog(null, "No Server Selected!");
 					
-				} else if (myNH.isServerOnline(PingCombo.getSelectedItem().toString())) {
+				} else if (myNH.isServerOnline(PingDropDown.getSelectedItem().toString())) {
 					txtPing.setText("Online");
 					txtPing.setBackground(Color.GREEN);
 				
@@ -232,11 +232,11 @@ public class OnLoadGUI {
 				}
 			}
 		);
-		PingServer.setFont(new Font("SansSerif", Font.BOLD, 11));
-		PingServer.setBorder(null);
-		PingServer.setBackground(Color.LIGHT_GRAY);
-		PingServer.setBounds(246, 31, 79, 35);
-		contentPanel.add(PingServer);
+		PingButton.setFont(new Font("SansSerif", Font.BOLD, 11));
+		PingButton.setBorder(null);
+		PingButton.setBackground(Color.LIGHT_GRAY);
+		PingButton.setBounds(246, 31, 79, 35);
+		contentPanel.add(PingButton);
 		
 		ConnectionsTable.setRowSelectionAllowed(true);
 		ConnectionsTable.setDefaultEditor(Object.class, null);
@@ -250,16 +250,16 @@ public class OnLoadGUI {
 		contentPanel.add(txtPing);
 		txtPing.setColumns(10);
 		
-		final JComboBox<String> ConnectionCombo = new JComboBox<String>();
-		ConnectionCombo.setFont(new Font("SansSerif", Font.BOLD, 16));
-		ConnectionCombo.setBounds(0, 0, 206, 30);
-		ConnectionCombo.setRenderer(myRender);
-		contentPanel.add(ConnectionCombo);
+		final JComboBox<String> ConnectionDropDown = new JComboBox<String>();
+		ConnectionDropDown.setFont(new Font("SansSerif", Font.BOLD, 16));
+		ConnectionDropDown.setBounds(0, 0, 206, 30);
+		ConnectionDropDown.setRenderer(myRender);
+		contentPanel.add(ConnectionDropDown);
 		
 		for (int i = 0; i < dbData.size(); i++) {
-			ConnectionCombo.addItem(dbData.get(i).getIP());
+			ConnectionDropDown.addItem(dbData.get(i).getIP());
 		}
-		ConnectionCombo.addActionListener(new ActionListener() {
+		ConnectionDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent a) {
 				
 			}
@@ -278,32 +278,32 @@ public class OnLoadGUI {
 		FileMenu.setFont(new Font("SansSerif", Font.BOLD, 12));
 		menuBar.add(FileMenu);
 		
-		JMenuItem mntmAdd = new JMenuItem("Add Server");
-		mntmAdd.setIcon(new ImageIcon("resources/Plus.png"));
-		mntmAdd.addActionListener(new ActionListener() {
+		JMenuItem FileMenuAddButton = new JMenuItem("Add Server");
+		FileMenuAddButton.setIcon(new ImageIcon("resources/Plus.png"));
+		FileMenuAddButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				addUI.setVisible(true);
 			}
 		});
-		mntmAdd.setFont(new Font("SansSerif", Font.BOLD, 12));
-		FileMenu.add(mntmAdd);
+		FileMenuAddButton.setFont(new Font("SansSerif", Font.BOLD, 12));
+		FileMenu.add(FileMenuAddButton);
 		
 		JSeparator separator = new JSeparator();
 		FileMenu.add(separator);
 		
-		JMenuItem mntmEdit = new JMenuItem("Edit Servers");
-		mntmEdit.setIcon(new ImageIcon("resources/Edit.png"));
-		mntmEdit.setFont(new Font("SansSerif", Font.BOLD, 12));
-		FileMenu.add(mntmEdit);
+		JMenuItem FileMenuEditButton = new JMenuItem("Edit Servers");
+		FileMenuEditButton.setIcon(new ImageIcon("resources/Edit.png"));
+		FileMenuEditButton.setFont(new Font("SansSerif", Font.BOLD, 12));
+		FileMenu.add(FileMenuEditButton);
 		
 		JSeparator separator_1 = new JSeparator();
 		FileMenu.add(separator_1);
 		
-		JMenuItem mntmDelete = new JMenuItem("Delete Server");
-		mntmDelete.setIcon(new ImageIcon("resources/Delete.png"));
-		mntmDelete.setFont(new Font("SansSerif", Font.BOLD, 12));
-		FileMenu.add(mntmDelete);
-		mntmDelete.addActionListener(new ActionListener() {
+		JMenuItem FileMenuDeleteButton = new JMenuItem("Delete Server");
+		FileMenuDeleteButton.setIcon(new ImageIcon("resources/Delete.png"));
+		FileMenuDeleteButton.setFont(new Font("SansSerif", Font.BOLD, 12));
+		FileMenu.add(FileMenuDeleteButton);
+		FileMenuDeleteButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent a) {
 
 			if (ConnectionsTable.getSelectedRow() == -1) {
@@ -317,14 +317,14 @@ public class OnLoadGUI {
 				ResultSet updated = DH.getFromDB();
 				ConnectionsTable.setModel(DbUtils.resultSetToTableModel(updated));
 				ArrayList<RemoteConnection> dbData = DH.pullData();
-				PingCombo.removeAllItems();
-				ConnectionCombo.removeAllItems();
+				PingDropDown.removeAllItems();
+				ConnectionDropDown.removeAllItems();
 				
 				for (int i = 0; i < dbData.size(); i++) {
-					PingCombo.addItem(dbData.get(i).getIP());
+					PingDropDown.addItem(dbData.get(i).getIP());
 				}
 				for (int i = 0; i < dbData.size(); i++) {
-					ConnectionCombo.addItem(dbData.get(i).getIP());
+					ConnectionDropDown.addItem(dbData.get(i).getIP());
 				}}
 		}
     	});
@@ -333,11 +333,11 @@ public class OnLoadGUI {
 		FileMenu.add(separator_2);
 		
 		
-		JMenuItem mntmExit = new JMenuItem("Exit System");
-		mntmExit.setIcon(new ImageIcon("resources/Exit.png"));
-		mntmExit.setFont(new Font("SansSerif", Font.BOLD, 12));
-		FileMenu.add(mntmExit);
-		mntmExit.addActionListener(new ActionListener() {;
+		JMenuItem FileMenuExitButton = new JMenuItem("Exit System");
+		FileMenuExitButton.setIcon(new ImageIcon("resources/Exit.png"));
+		FileMenuExitButton.setFont(new Font("SansSerif", Font.BOLD, 12));
+		FileMenu.add(FileMenuExitButton);
+		FileMenuExitButton.addActionListener(new ActionListener() {;
 		public void actionPerformed(ActionEvent a) {
 			System.exit(0);
 		}
@@ -350,10 +350,10 @@ public class OnLoadGUI {
 		menuBar.add(OptionsMenu);
 		
 	
-		HidePW.addItemListener(new ItemListener() {
+		OptionsMenuHideShowPasswordRadioButton.addItemListener(new ItemListener() {
 		    public void itemStateChanged(ItemEvent e) {
 		    	
-		    	boolean isSelected = HidePW.isSelected();  
+		    	boolean isSelected = OptionsMenuHideShowPasswordRadioButton.isSelected();  
 		        if(e.getStateChange() == ItemEvent.SELECTED) {
 		        	   	
 		        	DH.setPasswordSetting(isSelected);
@@ -391,14 +391,14 @@ public class OnLoadGUI {
 					ResultSet updated = DH.getFromDB();
 					ConnectionsTable.setModel(DbUtils.resultSetToTableModel(updated));
 					ArrayList<RemoteConnection> dbData = DH.pullData();
-					PingCombo.removeAllItems();
-					ConnectionCombo.removeAllItems();
+					PingDropDown.removeAllItems();
+					ConnectionDropDown.removeAllItems();
 					
 					for (int i = 0; i < dbData.size(); i++) {
-						PingCombo.addItem(dbData.get(i).getIP());
+						PingDropDown.addItem(dbData.get(i).getIP());
 					}
 					for (int i = 0; i < dbData.size(); i++) {
-						ConnectionCombo.addItem(dbData.get(i).getIP());
+						ConnectionDropDown.addItem(dbData.get(i).getIP());
 					}
 				}
 			
@@ -417,33 +417,33 @@ public class OnLoadGUI {
 		DeleteButton.setBounds(401, 2, 70, 35);
 		BottomMenu.add(DeleteButton);
 		
-		HidePW.setFont(new Font("SansSerif", Font.BOLD, 11));
-		HidePW.setHorizontalAlignment(SwingConstants.RIGHT);
-		OptionsMenu.add(HidePW);
-		HidePW.setSize(100,200);
+		OptionsMenuHideShowPasswordRadioButton.setFont(new Font("SansSerif", Font.BOLD, 11));
+		OptionsMenuHideShowPasswordRadioButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		OptionsMenu.add(OptionsMenuHideShowPasswordRadioButton);
+		OptionsMenuHideShowPasswordRadioButton.setSize(100,200);
 		
 		Component glue_1 = Box.createGlue();
 		OptionsMenu.add(glue_1);
 		
 			
-			JMenu mnNewMenu = new JMenu("Attributions");
-			mnNewMenu.setIcon(new ImageIcon("resources/Attribution.png"));
-			mnNewMenu.setFont(new Font("SansSerif", Font.BOLD, 12));
-			menuBar.add(mnNewMenu);
+			JMenu AttributionsMenu = new JMenu("Attributions");
+			AttributionsMenu.setIcon(new ImageIcon("resources/Attribution.png"));
+			AttributionsMenu.setFont(new Font("SansSerif", Font.BOLD, 12));
+			menuBar.add(AttributionsMenu);
 			
-			JLabel lblNewLabel = new JLabel("   All Icons provided by https://icons8.com    ");
-			mnNewMenu.add(lblNewLabel);
+			JLabel AttributionsLabel = new JLabel("   All Icons provided by https://icons8.com    ");
+			AttributionsMenu.add(AttributionsLabel);
 		
 		Component glue = Box.createGlue();
 		menuBar.add(glue);
 		
-		JMenu mnAbout = new JMenu("About  ");
-		mnAbout.setIcon(new ImageIcon("resources/About.png"));
-		mnAbout.setFont(new Font("SansSerif", Font.BOLD, 12));
-		menuBar.add(mnAbout);
+		JMenu AboutMenu = new JMenu("About  ");
+		AboutMenu.setIcon(new ImageIcon("resources/About.png"));
+		AboutMenu.setFont(new Font("SansSerif", Font.BOLD, 12));
+		menuBar.add(AboutMenu);
 		
-		JLabel lblAbout = new JLabel("   Windows RDP Manager - https://github.com/symonk/     ");
-		mnAbout.add(lblAbout);
+		JLabel AboutLabel = new JLabel("   Windows RDP Manager - https://github.com/symonk/     ");
+		AboutMenu.add(AboutLabel);
 		mainFrame.setVisible(true);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setSize(478,262);
