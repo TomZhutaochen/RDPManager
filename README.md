@@ -4,7 +4,7 @@ STILL UNDER HEAVY DEVELOPMENT
 
 Recently did a complete rewrite of the tool, currently in version 1.1 </br>
 
-![Beta GUI](RDPClient.png)
+![Beta GUI](RDPClient.PNG)
 
 
 
