@@ -129,7 +129,7 @@ public class OnLoadGUI {
 		springLayout.putConstraint(SpringLayout.EAST, BottomMenu, 472, SpringLayout.WEST, mainFrame.getContentPane());
 		mainFrame.getContentPane().add(BottomMenu);
 		BottomMenu.setLayout(null);
-		final JFrame addUI = AddServerUI.buildAddEditUI(ConnectionsTable,Populate);
+		final JFrame addUI = AddServerUI.buildAddUI(ConnectionsTable,Populate);
 		addUI.setVisible(false);
 		
 		
@@ -150,6 +150,10 @@ public class OnLoadGUI {
 		BottomMenu.setBorder(null);
 		
 		JButton EditButton = new JButton("Edit");
+		EditButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		EditButton.setIcon(new ImageIcon("resources/Edit.png"));
 		EditButton.setFont(new Font("SansSerif", Font.BOLD, 11));
 		EditButton.setBorder(null);

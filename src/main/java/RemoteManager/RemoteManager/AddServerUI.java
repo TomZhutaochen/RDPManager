@@ -32,7 +32,7 @@ public class AddServerUI {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public static JFrame buildAddEditUI(final JTable ConnectionsTable, final ResultSet Populate) {
+	public static JFrame buildAddUI(final JTable ConnectionsTable, final ResultSet Populate) {
 	final JFrame addServer = new JFrame();
 	addServer.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\sy\\Desktop\\RemoteManager\\RemoteManager\\resources\\Plus.png"));
 	addServer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
