@@ -130,6 +130,8 @@ public class OnLoadGUI {
 		mainFrame.getContentPane().add(BottomMenu);
 		BottomMenu.setLayout(null);
 		final JFrame addUI = AddServerUI.buildAddUI(ConnectionsTable,Populate);
+		EditServerUI editserv = new EditServerUI();
+		final JFrame editUI = editserv.buildEditUI();
 		addUI.setVisible(false);
 		
 		
@@ -152,6 +154,29 @@ public class OnLoadGUI {
 		JButton EditButton = new JButton("Edit");
 		EditButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				if (ConnectionsTable.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(null, "You have not selected a database record");
+					return;
+				} 
+				
+				
+				int selectedRow = ConnectionsTable.getSelectedRow();
+				String serverURL = ConnectionsTable.getValueAt(selectedRow, 1).toString();
+				RemoteConnection Editing = EditServerUI.editHandler(serverURL);
+				
+				String selectedURL = Editing.getIP();
+				String selectedUser = Editing.getUsername();
+				String selectedPass = Editing.getPassword();
+				
+				EditServerUI editserv = new EditServerUI();
+				editserv.URLValue = selectedURL;
+				editserv.UserValue = selectedUser;
+				editserv.PassValue = selectedPass;
+				
+				JFrame editUI = editserv.buildEditUI();
+			
+				editUI.setVisible(true);
 			}
 		});
 		EditButton.setIcon(new ImageIcon("resources/Edit.png"));
