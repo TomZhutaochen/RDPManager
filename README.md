@@ -1,17 +1,9 @@
 # RDPManager
 
-STILL UNDER HEAVY DEVELOPMENT
+Due to other projects, this is on hold, I will return to finish it at some point
 
-Recently did a complete rewrite of the tool, currently in version 1.1 </br>
+
 
 ![Beta GUI](RDPClient.PNG)
 
 
-
-❶ Update all Exception handling </br>
-❷ Create full unit testing & automation suite </br>
-❸ Add Editing functionality </br>
-❹ Update Logic throughout </br>
-❺ Add new DB Setting for VPN URL </br>
-❻ Add Connection, VPN Check functionality </br>
-❼ Brainstorm additional options </br>
